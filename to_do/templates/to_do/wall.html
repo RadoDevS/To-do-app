@@ -1,1 +1,14 @@
-<h1>To do App!</h1>
+<h1>To do app!</h1>
+
+<div>
+    <a href="{% url 'add' %}">Add note</a>
+
+    {% for note in notes reversed %}
+    <li>
+        <h2>{{ note.title}}</h2>
+        <p>{{ note.text }}</p>
+        <br>
+    </li>
+    {% endfor %}
+</div>
+
