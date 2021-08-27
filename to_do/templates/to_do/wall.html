@@ -10,13 +10,17 @@
 </div> 
 
     {% for note in notes reversed %}
-        <div>
-            <h2>{{ note.title}}</h2> 
-            <p>{{ note.date }}</p>
-            <p>{{ note.status }}</p>
+        <div>            
+            <a href="{% url 'update' note.id %}">Update</a>
+            <a href="{% url 'delete' note.id %}">Cancel</a>
+            
+            {% if note.status == True%}
+            <strike>{{note.title}}</strike>
+            {% else %}
+            <span>{{note.title}}</span>
+            {% endif %}
         </div>
-        
-    
     {% endfor %}
+
 </div>
 
