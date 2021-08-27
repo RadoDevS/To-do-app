@@ -1,21 +1,23 @@
 from django.shortcuts import redirect, render
 from .models import Note
+from .forms import *
 
 def wall(request):
-    notes = Note.objects.all()
-    return render(request, 'to_do/wall.html', {'notes': notes} )
 
-def add(request):
     if request.method == 'POST':
-        new_note = Note(
-            title = request.POST['title'],
-            text = request.POST['text']
-        )
+       form = NoteForm(request.POST)
+       if form.is_valid():
+        form.save()
+        return redirect( '/' )
 
-        new_note.save()
-        return redirect( 'wall' )
+    notes = Note.objects.all()
+    form = NoteForm()
+    context = {'notes': notes, 'form': form}
+    return render(request, 'to_do/wall.html', context)
 
-    return render(request, 'to_do/add.html')
+
+
+
 
 
 # Create your views here.

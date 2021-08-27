@@ -1,14 +1,22 @@
 <h1>To do app!</h1>
 
 <div>
-    <a href="{% url 'add' %}">Add note</a>
+    <form action="/" method="POST">
+        {% csrf_token %}
+        {{form.title}}
+        <input type="submit"  name="Create Note" >
+        
+    </form>
+</div> 
 
     {% for note in notes reversed %}
-    <li>
-        <h2>{{ note.title}}</h2>
-        <p>{{ note.text }}</p>
-        <br>
-    </li>
+        <div>
+            <h2>{{ note.title}}</h2> 
+            <p>{{ note.date }}</p>
+            <p>{{ note.status }}</p>
+        </div>
+        
+    
     {% endfor %}
 </div>
 
