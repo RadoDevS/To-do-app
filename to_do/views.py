@@ -1,7 +1,9 @@
 from django.shortcuts import redirect, render
 from .models import Note
 from .forms import *
+from django.contrib.auth.decorators import login_required
 
+@login_required
 def wall(request):
 
     if request.method == 'POST':
@@ -15,7 +17,7 @@ def wall(request):
     context = {'notes': notes, 'form': form}
     return render(request, 'to_do/wall.html', context)
 
-
+@login_required
 def update(request, pk):
     note = Note.objects.get(id = pk)
     form = NoteForm(instance=note)
@@ -30,7 +32,7 @@ def update(request, pk):
 
     return render (request, 'to_do/update.html', context)
 
-
+@login_required
 def delete(request, pk):
     item = Note.objects.get(id = pk)
 
