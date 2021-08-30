@@ -14,7 +14,9 @@ def wall(request):
         instance.save()
         return redirect( '/' )
 
-    notes = Note.objects.all()
+    
+    current_user = request.user.id
+    notes = Note.objects.filter(author = current_user)
     form = NoteForm()
     context = {'notes': notes, 'form': form}
     return render(request, 'to_do/wall.html', context)
