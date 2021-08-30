@@ -9,7 +9,9 @@ def wall(request):
     if request.method == 'POST':
        form = NoteForm(request.POST)
        if form.is_valid():
-        form.save()
+        instance  = form.save(commit=False)
+        instance.author = request.user
+        instance.save()
         return redirect( '/' )
 
     notes = Note.objects.all()

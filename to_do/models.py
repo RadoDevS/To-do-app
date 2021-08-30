@@ -7,7 +7,7 @@ class Note(models.Model):
     status = models.BooleanField(default=False)
     date = DateField(auto_now_add=True)
     test = models.BooleanField(default=False)
-    author = models.ForeignKey(User, on_delete = models.CASCADE, null=True, blank=True)
+    author = models.ForeignKey(User, on_delete = models.CASCADE, null=True, blank=True, default=User)
 
     def __str__(self):
         return self.title
